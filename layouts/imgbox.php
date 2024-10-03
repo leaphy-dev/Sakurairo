@@ -154,6 +154,8 @@ $print_social_zone = function() use ($all_opt,$social_display_icon):void{
                 <div class="hwcard-author-info">
                 <a href="<?php echo get_author_posts_url($author->ID); ?>">
                     <?php echo get_avatar($author->ID, 40); ?>
+                    </a>
+                    <a href="<?php echo get_author_posts_url($author->ID); ?>">
                     <span class="hwcard-author-name"><?php echo esc_html($author->display_name); ?></span>
                 </a>
                 </div>
@@ -170,6 +172,8 @@ $print_social_zone = function() use ($all_opt,$social_display_icon):void{
                 <div class="hwcard-author-info">
                 <a href="<?php echo get_author_posts_url($author->ID); ?>">
                     <?php echo get_avatar($author->ID, 40); ?>
+                    </a>
+                    <a href="<?php echo get_author_posts_url($author->ID); ?>">
                     <span class="hwcard-author-name"><?php echo esc_html($author->display_name); ?></span>
                 </a>
                 <span class="hwcard-author-posts-2"><?php printf(esc_html__('Posts: %d', 'sakurairo'), $post_count); ?></span>

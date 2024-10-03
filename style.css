@@ -2907,8 +2907,14 @@ h1.main-title {
 
 .hwcard-author-name{
   font-size: 20px;
-  align-content: center;
+  top: 6px;
+  position: relative;
   margin-left: 12px;
+  color: #505050;
+}
+
+.hwcard-author-name:hover {
+color: var(--theme-skin-matching);
 }
 
 .hwcard-author-data{

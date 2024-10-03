@@ -135,35 +135,54 @@ $print_social_zone = function() use ($all_opt,$social_display_icon):void{
         if ($author_count == 1) {
             $author = $authors[0];
             $post_count = count_user_posts($author->ID, 'post');
+            
+            // 获取该作者所有文章的ID
+            $author_posts = get_posts(array(
+                'author' => $author->ID,
+                'post_type' => 'post',
+                'posts_per_page' => -1,
+                'fields' => 'ids'
+            ));
+            
+            // 统计这些文章的评论数量
             $comment_count = get_comments(array(
-                'author__in' => array($author->ID),
+                'post__in' => $author_posts,
                 'count' => true
             ));
             ?>
-            <div class="author-info">
-                <?php echo get_avatar($author->ID, 64); ?>
-                <div class="author-details">
-                    <span class="author-name"><?php echo esc_html($author->display_name); ?></span>
-                    <span class="author-posts"><?php echo esc_html($post_count); ?> posts</span>
-                    <span class="author-comments"><?php echo esc_html($comment_count); ?> comments</span>
+            <div class="hwcard-author">
+                <div class="hwcard-author-info">
+                <a href="<?php echo get_author_posts_url($author->ID); ?>">
+                    <?php echo get_avatar($author->ID, 40); ?>
+                    <span class="hwcard-author-name"><?php echo esc_html($author->display_name); ?></span>
+                </a>
+                </div>
+                <div class="hwcard-author-data">
+                    <span class="hwcard-author-posts"><i class="fa-regular fa-pen-to-square"></i> <?php printf(esc_html__('Posts: %d', 'sakurairo'), $post_count); ?></span>
+                    <span class="hwcard-author-comments"><i class="fa-regular fa-comment"></i> <?php printf(esc_html__('Comments: %d', 'sakurairo'), $comment_count); ?></span>
                 </div>
             </div>
         <?php } elseif ($author_count == 2) {
             foreach ($authors as $author) {
                 $post_count = count_user_posts($author->ID, 'post');
                 ?>
-                <div class="author-info">
-                    <?php echo get_avatar($author->ID, 64); ?>
-                    <div class="author-details">
-                        <span class="author-name"><?php echo esc_html($author->display_name); ?></span>
-                        <span class="author-posts"><?php echo esc_html($post_count); ?> posts</span>
-                    </div>
-                </div>
+            <div class="hwcard-author">
+                <div class="hwcard-author-info">
+                <a href="<?php echo get_author_posts_url($author->ID); ?>">
+                    <?php echo get_avatar($author->ID, 40); ?>
+                    <span class="hwcard-author-name"><?php echo esc_html($author->display_name); ?></span>
+                </a>
+                <span class="hwcard-author-posts-2"><?php printf(esc_html__('Posts: %d', 'sakurairo'), $post_count); ?></span>
+            </div>
+            </div>
             <?php }
         } elseif ($author_count >= 3) {
-            foreach ($authors as $author) { ?>
-                <div class="author-info">
-                    <?php echo get_avatar($author->ID, 64); ?>
+            foreach ($authors as $author) {
+                ?>
+                <div class="hwcard-author-avatar">
+                    <a href="<?php echo get_author_posts_url($author->ID); ?>">
+                        <?php echo get_avatar($author->ID, 48); ?>
+                    </a>
                 </div>
             <?php }
         } ?>

@@ -2842,6 +2842,7 @@ h1.main-title {
   width: 860px;
   transform: translateX(-50%);
   bottom: 10%;
+  z-index: 5;
 }
 
 .homepage-widget-card {
@@ -2883,13 +2884,53 @@ h1.main-title {
   max-height: 140px;
   margin: 2px;
   word-wrap: break-word;
-  display: block;
+  display: flex;
   word-break: break-all;
+  flex-wrap: wrap;
 }
 
 .short-bulletin{
   font-size: 25px;
   letter-spacing: 2px;
+}
+
+.hwcard-author{
+  display: flex;
+  flex-direction: column;
+}
+
+.hwcard-author-info{
+  display: inline-flex;
+  flex-direction: row;
+  padding: 5px;
+}
+
+.hwcard-author-name{
+  font-size: 20px;
+  align-content: center;
+  margin-left: 12px;
+}
+
+.hwcard-author-data{
+  margin-left: 6px;
+  gap: 10px;
+  display: inline-flex;
+  margin-bottom: 2px;
+}
+
+.hwcard-author-data i {
+  font-size: 13px;
+}
+
+.hwcard-author-posts-2{
+  display: inline-flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.hwcard-author-avatar{
+  margin: 2px 6px;
+  min-width: 48px;
 }
 
 .site-header.iconsearch {

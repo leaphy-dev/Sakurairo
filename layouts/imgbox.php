@@ -97,11 +97,88 @@ $print_social_zone = function() use ($all_opt,$social_display_icon):void{
             <?php endif; ?>
         </div>
     <?php } ?>
+    <div class="homepage-widget">
+    <?php if (iro_opt('bulletin_board')) : ?>
+    <div class="homepage-widget-card">
+        <div class="homepage-widget-card-info">
+            <i class="fa-solid fa-bullhorn"></i><?php esc_attr_e('Bulletin', 'sakurairo'); ?>
+        </div>
+        <div class="hwcard-content">
+            <?php $text = iro_opt('bulletin_text'); ?>
+            <?php if (mb_strlen($text, 'UTF-8') > 80) { ?>
+                <?php $text = mb_substr($text, 0, 80, 'UTF-8'); ?>
+            <?php } ?>
+            <?php if (mb_strlen($text, 'UTF-8') < 20) { ?>
+                <div class="short-bulletin"><?php echo esc_html($text); ?></div>
+            <?php } else { ?>
+                <?php echo esc_html($text); ?>
+            <?php } ?>
+        </div>
+    </div>
+    <?php endif; ?>
+    <div class="homepage-widget-card">
+    <div class="homepage-widget-card-info">
+        <i class="fa-solid fa-at"></i><?php esc_attr_e('Author', 'sakurairo'); ?>
+    </div>
+    <div class="hwcard-content">
+        <?php
+        $args = array(
+            'role__in' => array('Administrator', 'Editor', 'Author', 'Contributor'),
+            'has_published_posts' => true,
+            'orderby' => 'post_count',
+            'order' => 'DESC'
+        );
+        $user_query = new WP_User_Query($args);
+        $authors = $user_query->get_results();
+        $author_count = count($authors);
+
+        if ($author_count == 1) {
+            $author = $authors[0];
+            $post_count = count_user_posts($author->ID, 'post');
+            $comment_count = get_comments(array(
+                'author__in' => array($author->ID),
+                'count' => true
+            ));
+            ?>
+            <div class="author-info">
+                <?php echo get_avatar($author->ID, 64); ?>
+                <div class="author-details">
+                    <span class="author-name"><?php echo esc_html($author->display_name); ?></span>
+                    <span class="author-posts"><?php echo esc_html($post_count); ?> posts</span>
+                    <span class="author-comments"><?php echo esc_html($comment_count); ?> comments</span>
+                </div>
+            </div>
+        <?php } elseif ($author_count == 2) {
+            foreach ($authors as $author) {
+                $post_count = count_user_posts($author->ID, 'post');
+                ?>
+                <div class="author-info">
+                    <?php echo get_avatar($author->ID, 64); ?>
+                    <div class="author-details">
+                        <span class="author-name"><?php echo esc_html($author->display_name); ?></span>
+                        <span class="author-posts"><?php echo esc_html($post_count); ?> posts</span>
+                    </div>
+                </div>
+            <?php }
+        } elseif ($author_count >= 3) {
+            foreach ($authors as $author) { ?>
+                <div class="author-info">
+                    <?php echo get_avatar($author->ID, 64); ?>
+                </div>
+            <?php }
+        } ?>
+    </div>
+</div>
+    <div class="homepage-widget-card">
+        <div class="homepage-widget-card-info">
+            <i class="fa-solid fa-paperclip"></i><?php esc_attr_e('Links', 'sakurairo'); ?>
+        </div>
+    </div>
 </figure>
 <?php
 echo bgvideo(); //BGVideo 
 ?>
 <!-- 首页下拉箭头 -->
 <?php if (iro_opt('drop_down_arrow', 'true')) : ?>
-<div class="headertop-down" onclick="headertop_down()"><span><svg t="1682342753354" class="homepage-downicon" viewBox="0 0 1843 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="21355" width="80px" height="80px"><path d="M1221.06136021 284.43250057a100.69380037 100.69380037 0 0 1 130.90169466 153.0543795l-352.4275638 302.08090944a100.69380037 100.69380037 0 0 1-130.90169467 0L516.20574044 437.48688007A100.69380037 100.69380037 0 0 1 647.10792676 284.43250057L934.08439763 530.52766665l286.97696258-246.09516608z" fill="<?php echo iro_opt('drop_down_arrow_color'); ?>" p-id="21356"></path></svg></span></div>
+<div class="headertop-down" onclick="headertop_down()"><span><svg t="1682342753354" class="homepage-downicon" viewBox="0 0 1843 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="21355" width="60px" height="60px"><path d="M1221.06136021 284.43250057a100.69380037 100.69380037 0 0 1 130.90169466 153.0543795l-352.4275638 302.08090944a100.69380037 100.69380037 0 0 1-130.90169467 0L516.20574044 437.48688007A100.69380037 100.69380037 0 0 1 647.10792676 284.43250057L934.08439763 530.52766665l286.97696258-246.09516608z" fill="<?php echo iro_opt('drop_down_arrow_color'); ?>" p-id="21356"></path></svg></span></div>
 <?php endif; ?>

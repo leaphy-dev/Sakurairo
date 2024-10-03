@@ -2094,80 +2094,12 @@ $prefix = 'iro_options';
       ),
 
       array(
-        'id' => 'bulletin_board_style',
-        'type' => 'radio',
-        'title' => __('Bulletin Board Style','sakurairo_csf'),
-        'dependency' => array( 'bulletin_board', '==', 'true', '', 'true' ),
-        'options' => array(
-          'picture' => __('Picture Background','sakurairo_csf'),
-          'pure' => __('Color Background','sakurairo_csf'),
-        ),
-        'default' => 'picture'
-      ),
-
-      array(
-        'id' => 'bulletin_board_icon',
-        'type' => 'switcher',
-        'title' => __('Bulletin Board "Notice" Icon','sakurairo_csf'),
-        'dependency' => array( 'bulletin_board', '==', 'true', '', 'true' ),
-        'label' => __('The "Notice" icon will be displayed on the left side of the announcement bar','sakurairo_csf'),
-        'default' => true
-      ),
-
-      array(
-        'id' => 'bulletin_board_bg',
-        'type' => 'upload',
-        'title' => __('Bulletin Board Background','sakurairo_csf'),
-        'dependency' => array(
-          array( 'bulletin_board', '==', 'true', '', 'true' ),
-          array( 'bulletin_board_style', '==', 'picture' ),
-        ),
-        'desc' => __('Best width 820px, best height 67px','sakurairo_csf'),
-        'library' => 'image',
-        'default' => 'https://s.nmxc.ltd/sakurairo_vision/@2.7/series/announcement_bg.webp'
-      ),
-
-      array(
-        'id' => 'bulletin_board_border_color',
-        'type' => 'color',
-        'title' => __('Bulletin Board Border Color','sakurairo_csf'),
-        'dependency' => array(
-          array( 'bulletin_board', '==', 'true', '', 'true' ),
-          array( 'bulletin_board_style', '==', 'pure' ),
-        ),
-        'desc' => __('Customize the colors, it is recommended to use a light color that corresponds with the theme color','sakurairo_csf'),
-        'default' => '#E6E6E6'
-      ),
-
-      array(
         'id' => 'bulletin_text',
         'type' => 'text',
         'title' => __('Bulletin Board Text','sakurairo_csf'),
         'dependency' => array( 'bulletin_board', '==', 'true', '', 'true' ),
         'desc' => __('Fill in the announcement text, the text beyond 142 bytes will be hidden','sakurairo_csf'),
       ),
-
-      array(
-        'id' => 'bulletin_board_text_align',
-        'type' => 'image_select',
-        'title' => __('Bulletin Board Alignment','sakurairo_csf'),
-        'dependency' => array( 'bulletin_board', '==', 'true', '', 'true' ),
-        'options'     => array(
-          'left'  => 'https://s.nmxc.ltd/sakurairo_vision/@2.7/options/announce_text_left.webp',
-          'right'  => 'https://s.nmxc.ltd/sakurairo_vision/@2.7/options/announce_text_right.webp',
-          'center'  => 'https://s.nmxc.ltd/sakurairo_vision/@2.7/options/announce_text_center.webp',
-        ),
-        'default'     => 'left'
-      ),
-
-      array(
-        'id' => 'bulletin_text_color',
-        'type' => 'color',
-        'title' => __('Bulletin Board Text Color','sakurairo_csf'),
-        'dependency' => array( 'bulletin_board', '==', 'true', '', 'true' ),
-        'desc' => __('Customize the colors, suggest using a corresponding color with the background color','sakurairo_csf'),
-        'default' => '#999'
-      ),    
 
       array(
         'type' => 'subheading',

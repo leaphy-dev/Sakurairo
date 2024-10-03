@@ -1,24 +1,6 @@
 <?php
 get_header();
 
-if (iro_opt('bulletin_board') == '1') {
-	$text = iro_opt('bulletin_text');
-	?>
-	<div class="notice" style="margin-top:60px">
-		<?php if (iro_opt('bulletin_board_icon', 'true')) : ?>
-			<div class="notice-icon"><?php esc_html_e('Notice', 'sakurairo'); ?></div>
-		<?php endif; ?>
-		<div class="notice-content">
-			<?php if (strlen($text) > 142) { ?>
-				<div class="scrolling-text"><?php echo esc_html($text); ?></div>
-			<?php } else { ?>
-				<?php echo esc_html($text); ?>
-			<?php } ?>
-		</div>
-	</div>
-	<?php
-}
-
 if (iro_opt('exhibition_area') == '1') {
 	$layout = iro_opt('exhibition_area_style') == 'left_and_right' ? 'feature_v2' : 'feature';
 	get_template_part('layouts/' . $layout);

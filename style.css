@@ -78,28 +78,6 @@ Tags: 多彩、轻松上手、体验完善、高自定义度
   transition: background 0.8s;
 }
 
-.notice {
-  animation: main .6s;
-  padding: 20px;
-  border: 1px solid #E6E6E6;
-  color: #969696;
-  position: relative;
-  display: inline-block;
-  width: 100%;
-  height: 67px;
-  border-radius: 15px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  transition: all 0.6s ease-in-out;
-}
-
-.notice-icon {
-  float: left;
-  margin: 2px 10px;
-  font-family: 'Dela Gothic One';
-}
-
 .post-list-thumb {
   animation: main .6s;
   will-change: transform;
@@ -2661,16 +2639,6 @@ h1.main-title {
   transition: opacity .4s ease-out;
 }
 
-.notice i {
-  float: left;
-  color: #999;
-  font-size: 18px;
-  padding-right: 15px;
-  padding-left: 5px;
-  font-weight: var(--global-font-weight);
-
-}
-
 .headertop::before {
   content: '';
   position: absolute;
@@ -2862,6 +2830,66 @@ h1.main-title {
   transform: translate3d(0, 16px, 0);
   opacity: 1;
   visibility: visible;
+}
+
+.homepage-widget {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  left: 50%;
+  position: absolute;
+  width: 860px;
+  transform: translateX(-50%);
+  bottom: 10%;
+}
+
+.homepage-widget-card {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-height: 135px;
+  height: fit-content;
+  width: 245px;
+  margin: 10px;
+  background: var(--infor_bar_bgcolor, rgba(255, 255, 255, 0.8));
+  padding: 10px;
+  border: 1px solid var(--infor_bar_bgcolor, rgba(255, 255, 255, 0.8));
+  box-sizing: initial;
+  white-space: nowrap;
+  font-weight: var(--global-font-weight);
+  backdrop-filter: blur(10px);
+}
+
+.homepage-widget-card-info{
+  font-size: 13px;
+  gap: 8px;
+  display: flex;
+  align-items: center;
+  color: #666666;
+  margin-bottom: 1px;
+}
+
+.homepage-widget-card p {
+  font-size: 14px;
+}
+
+.hwcard-content{
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 15px;
+  height: fit-content;
+  max-height: 140px;
+  margin: 2px;
+  word-wrap: break-word;
+  display: block;
+  word-break: break-all;
+}
+
+.short-bulletin{
+  font-size: 25px;
+  letter-spacing: 2px;
 }
 
 .site-header.iconsearch {
@@ -3964,13 +3992,6 @@ input[type=radio]:checked:before {
   font-weight: var(--global-font-weight, 400);
 }
 
-.mashiro-author-info {
-  background: url(//static.mashiro.top/wp-content/themes/Sakura/images/LOGO-Unicorn-Gradient.svg);
-  width: 200px;
-  height: 200px;
-  margin: auto;
-}
-
 .itempic {
   min-height: 280px;
   max-height: 300px;
@@ -4916,8 +4937,8 @@ h5::before {
 
 .headertop-down {
   position: absolute;
-  bottom: 50px;
-  left: calc(50% - 42px);
+  bottom: 15px;
+  left: calc(50% - 32px);
   z-index: 5; 
   animation-name: float-down;  
   animation-duration: 5s;  
@@ -6555,11 +6576,6 @@ li.feature-2 {
   transform: translateY(0);
 }
 
-.notice-content {
-  display: initial;
-  vertical-align: middle;
-}
-
 .headertop.filter-undertint::before {
   background-color: rgba(255, 255, 255, .3);
   z-index: 1;
@@ -8169,14 +8185,6 @@ body:not(.heimu_toggle_on) .new:hover .heimu.off {
   .siren-checkbox-label {
     top: 8px;
     margin-bottom: 10px;
-  }
-}
-
-@media (max-width:860px) {
-  .notice {
-    margin-top: 40px;
-    margin-bottom: 20px;
-    width: 100%;
   }
 }
 
@@ -10037,10 +10045,6 @@ body.dark blockquote:before {
 
 body.dark blockquote:after {
   color: #CCCCCC;
-}
-
-body.dark .notice {
-  filter: brightness(90%);
 }
 
 body.dark .notification {

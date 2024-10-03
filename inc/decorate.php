@@ -149,15 +149,6 @@ font-size: <?=$text_logo['size']; ?>px;
 font-family: <?= isset($text_logo['font']) ? $text_logo['font'] : 'Noto Serif SC'; ?> ;
 }
 
-.notice i ,
-.notice {
-    color: <?=iro_opt('bulletin_text_color'); ?>;
-}
-
-.notice {
-    border: 1px solid <?=iro_opt('bulletin_board_border_color'); ?>;
-}
-
 <?php if(iro_opt('entry_content_style') == "sakurairo"){ ?>
 .entry-content th {
     background-color: <?=iro_opt('theme_skin'); ?>
@@ -1150,18 +1141,6 @@ body.dark .post-list-thumb i{
 
 <?php endif; ?>
 
-<?php if(iro_opt('bulletin_board_text_align') == 'center'){ ?>
-.notice {
-    text-align: center;
-}
-
-<?php }if(iro_opt('bulletin_board_text_align') == 'right'){ ?>
-.notice {
-    text-align: right;
-}
-
-<?php } ?>
-
 <?php if(iro_opt('area_title_text_align') == 'center'){ ?>
 h1.fes-title,
 h1.main-title {
@@ -1175,23 +1154,6 @@ h1.main-title {
 }
 
 <?php } ?>
-
-<?php if(iro_opt('bulletin_board_style') == 'picture'){ ?>
-.notice {
-    background-image:url(<?=iro_opt('bulletin_board_bg', ''); ?>);
-    background-repeat: round;
-    border: none;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
-}
-
-<?php }if(iro_opt('bulletin_board_style') == 'pure'){ ?>
-.notice {
-    background: #fbfbfb50;
-}
-
-<?php } 
-
-?>
 
 <?php 
 if(iro_opt('cover_half_screen_curve',true)){

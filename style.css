@@ -2839,7 +2839,7 @@ h1.main-title {
   margin-top: 20px;
   left: 50%;
   position: absolute;
-  width: 860px;
+  width: 840px;
   transform: translateX(-50%);
   bottom: 10%;
   z-index: 5;
@@ -2851,7 +2851,7 @@ h1.main-title {
   padding: 20px;
   max-height: 135px;
   height: fit-content;
-  width: 245px;
+  width: 238px;
   margin: 10px;
   background: var(--infor_bar_bgcolor, rgba(255, 255, 255, 0.8));
   padding: 10px;
@@ -2860,6 +2860,7 @@ h1.main-title {
   white-space: nowrap;
   font-weight: var(--global-font-weight);
   backdrop-filter: blur(10px);
+  overflow: hidden;
 }
 
 .homepage-widget-card-info{
@@ -2896,7 +2897,7 @@ h1.main-title {
 
 .hwcard-author{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .hwcard-author-info{
@@ -2906,22 +2907,21 @@ h1.main-title {
 }
 
 .hwcard-author-name{
-  font-size: 20px;
+  font-size: 18px;
   top: 6px;
   position: relative;
-  margin-left: 12px;
   color: #505050;
 }
 
 .hwcard-author-name:hover {
-color: var(--theme-skin-matching);
+  color: var(--theme-skin-matching);
 }
 
 .hwcard-author-data{
-  margin-left: 6px;
   gap: 10px;
   display: inline-flex;
   margin-bottom: 2px;
+  position: relative;
 }
 
 .hwcard-author-data i {
@@ -2937,6 +2937,74 @@ color: var(--theme-skin-matching);
 .hwcard-author-avatar{
   margin: 2px 6px;
   min-width: 48px;
+}
+
+.hwcard-author-avatar img,
+.hwcard-author img{
+  border-radius: 50%;
+  border: 2px solid #ffffffbd;
+  box-shadow: 0 1px 12px -4px #dadada;
+  transition: all 0.6s ease-in-out;
+  -webkit-transition: all 0.6s ease-in-out;
+}
+
+.hwcard-author-avatar img:hover,
+.hwcard-author img:hover{
+  transform: rotate(360deg);
+  transition: all 0.6s ease-in-out;
+  -webkit-transition: all 0.6s ease-in-out;
+}
+
+.hwcard-author-avatar-s {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  position: relative;
+  left: -50px;
+  top: 5px;
+  margin-bottom: 15px;
+}
+
+.author-avatar-svg {
+  position: relative;
+}
+
+.author-avatar-img {
+  clip-path: circle(50%);
+}
+
+.textPath {
+  text-anchor: middle;
+  dominant-baseline: middle;
+  fill: var(--theme-skin-matching);
+}
+
+.author-name-text {
+  font-size: 10px;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  fill: var(--theme-skin-matching); /* 设置文本颜色 */
+}
+
+.hwcard-author-wrapper,.hwcard-author-data-item{
+  display: flex;
+  flex-direction: column;
+}
+
+.hwcard-author-wrapper{
+  left: -24px;
+  top: 18px;
+  position: relative;
+  gap: 26px;
+  display: inline-flex;
+  flex-direction: row;
+  margin-bottom: 2px;
+}
+
+.hwcard-author-data-value{
+  font-size: 28px;
 }
 
 .site-header.iconsearch {

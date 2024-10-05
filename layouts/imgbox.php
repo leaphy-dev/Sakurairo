@@ -37,6 +37,61 @@ $print_social_zone = function() use ($all_opt, $social_display_icon): void {
         <li id="bg-next"><img loading="lazy" src="<?= $social_display_icon ?>next.png" alt="<?= __('Next', 'sakurairo') ?>"/></li>
     <?php endif;
 };
+
+// 获取作者信息
+$args = array(
+    'role__in' => array('Administrator', 'Editor', 'Author', 'Contributor'),
+    'has_published_posts' => true,
+    'orderby' => 'post_count',
+    'order' => 'DESC'
+);
+$user_query = new WP_User_Query($args);
+$authors = $user_query->get_results();
+$author_count = count($authors);
+
+$author_info = [];
+if ($author_count == 1) {
+    $author = $authors[0];
+    $post_count = count_user_posts($author->ID, 'post');
+
+    // 获取该作者所有文章的ID
+    $author_posts = get_posts(array(
+        'author' => $author->ID,
+        'post_type' => 'post',
+        'posts_per_page' => -1,
+        'fields' => 'ids'
+    ));
+
+    // 统计这些文章的评论数量
+    $comment_count = get_comments(array(
+        'post__in' => $author_posts,
+        'count' => true
+    ));
+
+    // 获取作者介绍并限制字数
+    $author_description = get_the_author_meta('description', $author->ID);
+    if (mb_strlen($author_description, 'UTF-8') > 25) {
+        $author_description = mb_substr($author_description, 0, 25, 'UTF-8') . '...';
+    }
+
+    $author_info = [
+        'type' => 'single',
+        'author' => $author,
+        'post_count' => $post_count,
+        'comment_count' => $comment_count,
+        'author_description' => $author_description
+    ];
+} elseif ($author_count == 2) {
+    $author_info = [
+        'type' => 'double',
+        'authors' => $authors
+    ];
+} elseif ($author_count >= 3) {
+    $author_info = [
+        'type' => 'multiple',
+        'authors' => array_slice($authors, 0, 8)
+    ];
+}
 ?>
 
 <div id="banner_wave_1"></div>
@@ -97,55 +152,29 @@ $print_social_zone = function() use ($all_opt, $social_display_icon): void {
             </div>
         <?php endif; ?>
         <div class="homepage-widget-card">
-            <div class="homepage-widget-card-info">
-                <i class="fa-solid fa-at"></i><?php esc_attr_e('Author', 'sakurairo'); ?>
+            <div class="homepage-widget-card-info" style="justify-content: space-between;">
+                <div class="hwcard-info-author-e1"><i class="fa-solid fa-at"></i><?php esc_attr_e('Author', 'sakurairo'); ?></div>
+                <?php 
+                if ($author_info['type'] == 'single') {
+                    echo '<a href="' . esc_url(get_author_posts_url($author_info['author']->ID)) . '">' . esc_html($author_info['author']->display_name) . '</a>';
+                } else {
+                    echo esc_html($author_count);
+                    esc_attr_e(' Member', 'sakurairo');
+                }
+                ?>
             </div>
-            <div class="hwcard-content-unlimited">
-                <?php
-                $args = array(
-                    'role__in' => array('Administrator', 'Editor', 'Author', 'Contributor'),
-                    'has_published_posts' => true,
-                    'orderby' => 'post_count',
-                    'order' => 'DESC'
-                );
-                $user_query = new WP_User_Query($args);
-                $authors = $user_query->get_results();
-                $author_count = count($authors);
-
-                if ($author_count == 1) {
-                    $author = $authors[0];
-                    $post_count = count_user_posts($author->ID, 'post');
-
-                    // 获取该作者所有文章的ID
-                    $author_posts = get_posts(array(
-                        'author' => $author->ID,
-                        'post_type' => 'post',
-                        'posts_per_page' => -1,
-                        'fields' => 'ids'
-                    ));
-
-                    // 统计这些文章的评论数量
-                    $comment_count = get_comments(array(
-                        'post__in' => $author_posts,
-                        'count' => true
-                    ));
-
-                    // 获取作者介绍并限制字数
-                    $author_description = get_the_author_meta('description', $author->ID);
-                    if (mb_strlen($author_description, 'UTF-8') > 25) {
-                        $author_description = mb_substr($author_description, 0, 25, 'UTF-8') . '...';
-                    }
-                    ?>
+                <?php if ($author_info['type'] == 'single'): ?>
+                    <div class="hwcard-content-unlimited">
                     <div class="hwcard-author">
                         <div class="hwcard-author-avatar-s">
                             <svg width="120" height="120" viewBox="0 0 120 120" class="author-avatar-svg">
                                 <defs>
                                     <path id="circlePath" d="M 55, 65 m 0, -50 a 50,50 0 1,1 0,100 a 50,50 0 1,1 0,-100"/>
                                 </defs>
-                                <image x="10" y="20" width="90" height="90" xlink:href="<?= get_avatar_url($author->ID, ['size' => 100]); ?>" class="author-avatar-img"/>
+                                <image x="10" y="20" width="90" height="90" xlink:href="<?= get_avatar_url($author_info['author']->ID, ['size' => 100]); ?>" class="author-avatar-img"/>
                                 <text>
                                     <textPath xlink:href="#circlePath">
-                                        <?= esc_html($author_description); ?>
+                                        <?= esc_html($author_info['author_description']); ?>
                                     </textPath>
                                 </text>
                             </svg>
@@ -153,49 +182,47 @@ $print_social_zone = function() use ($all_opt, $social_display_icon): void {
                         <div class="hwcard-author-wrapper">
                             <div class="hwcard-author-data-item">
                                 <i class="fa-regular fa-pen-to-square"></i>
-                                <span class="hwcard-author-data-value"><?= $post_count; ?></span>
+                                <span class="hwcard-author-data-value"><?= $author_info['post_count']; ?></span>
                                 <span class="hwcard-author-data-label"><?= esc_html__('Posts', 'sakurairo'); ?></span>
                             </div>
                             <div class="hwcard-author-data-item">
                                 <i class="fa-regular fa-comment"></i>
-                                <span class="hwcard-author-data-value"><?= $comment_count; ?></span>
+                                <span class="hwcard-author-data-value"><?= $author_info['comment_count']; ?></span>
                                 <span class="hwcard-author-data-label"><?= esc_html__('Comments', 'sakurairo'); ?></span>
                             </div>
                         </div>
-                        </div>
-                <?php } elseif ($author_count == 2) {
-                    foreach ($authors as $author) {
-                        $post_count = count_user_posts($author->ID, 'post'); ?>
-                        <div class="hwcard-content">
-                            <div class="hwcard-author">
-                                <div class="hwcard-author-info">
-                                    <a href="<?= get_author_posts_url($author->ID); ?>">
-                                        <?= get_avatar($author->ID, 40); ?>
-                                    </a>
-                                    <a href="<?= get_author_posts_url($author->ID); ?>">
-                                        <span class="hwcard-author-name"><?= esc_html($author->display_name); ?></span>
-                                    </a>
-                                    <span class="hwcard-author-posts-2"><?= sprintf(esc_html__('Posts: %d', 'sakurairo'), $post_count); ?></span>
-                                </div>
-                            </div>
-                        </div>
-                    <?php }
-                } elseif ($author_count >= 3) {
-                    $count = 0;
-                    foreach ($authors as $author) {
-                        if ($count >= 8) break; ?>
-                        <div class="hwcard-content">
+                    </div>
+                </div>
+                <?php elseif ($author_info['type'] == 'double'): ?>
+                    <div class="hwcard-content">
+    <?php foreach ($author_info['authors'] as $author): ?>
+        <div class="hwcard-author-d">
+            <div class="hwcard-author-avatar-d">
+                <a href="<?= get_author_posts_url($author->ID); ?>">
+                    <?= get_avatar($author->ID, 48); ?>
+                </a>
+            </div>
+            <a href="<?= get_author_posts_url($author->ID); ?>">
+                    <span class="hwcard-author-name-d"><?= esc_html($author->display_name); ?></span>
+                </a>
+            <div class="hwcard-author-data-item-d">
+                <span class="hwcard-author-data-value-d"><?= count_user_posts($author->ID); ?></span>
+                <span class="hwcard-author-data-label-d"><?= esc_html__('Posts', 'sakurairo'); ?></span>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>
+                <?php elseif ($author_info['type'] == 'multiple'): ?>
+                    <div class="hwcard-content">
+                    <?php foreach ($author_info['authors'] as $author): ?>
                             <div class="hwcard-author-avatar">
                                 <a href="<?= get_author_posts_url($author->ID); ?>">
                                     <?= get_avatar($author->ID, 48); ?>
                                 </a>
                             </div>
-                        </div>
-                        <?php
-                        $count++;
-                    }
-                } ?>
-            </div>
+                    <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
         </div>
         <div class="homepage-widget-card">
             <div class="homepage-widget-card-info">

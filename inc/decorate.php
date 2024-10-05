@@ -339,8 +339,7 @@ html {
 
 /*深色模式控件透明度*/
 body.dark .header-info,
-body.dark .header-shuo,
-body.dark .top-social img
+body.dark .header-shuo
 {color:#fff;background:rgba(51,51,51,<?=iro_opt('theme_darkmode_widget_transparency'); ?>);}
 
 body.dark .the-feature.from_left_and_right .info
@@ -627,7 +626,7 @@ border-radius: <?=iro_opt('avatar_radius'); ?>px;
 <?php if (iro_opt('cover_animation', 'true')): ?>
 h1.main-title, h1.fes-title,.the-feature.from_left_and_right .info,
 .header-info p,.header-info,.header-shuo,.header-shuo p,
-.focusinfo .header-tou img,.top-social img,.center-text{
+.focusinfo .header-tou img,.center-text{
 	-moz-animation: homepage-load-animation  <?=iro_opt('cover_animation_time'); ?>s;
     -webkit-animation:homepage-load-animation  <?=iro_opt('cover_animation_time'); ?>s;
 	animation: homepage-load-animation  <?=iro_opt('cover_animation_time'); ?>s;
@@ -773,12 +772,6 @@ animation: slow-rotate 10s linear infinite;
 <?php if (!iro_opt('chatgpt_article_summarize', 'true')): ?>
 .ai-excerpt,
 .ai-excerpt-tip {
-    display: none;
-}
-<?php endif; ?>
-
-<?php if (!iro_opt('social_area', 'true')): ?>
-.top-social_v2,.top-social{
     display: none;
 }
 <?php endif; ?>

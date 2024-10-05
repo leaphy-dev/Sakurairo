@@ -2748,43 +2748,6 @@ h1.main-title {
   transition: all 0.6s ease-in-out;
 }
 
-.top-social {
-  height: 30px;
-  margin-top: 28px;
-  list-style: none;
-  display: inline-block;
-}
-
-.top-social img,
-.top-social i {
-  height: 36px;
-  width: 40px;
-  padding: 8px 10px;
-  border: 0.5px solid var(--infor_bar_bgcolor, rgba(255, 255, 255, 0.8));
-  background: var(--infor_bar_bgcolor, rgba(255, 255, 255, 0.9));
-  transition: all 0.6s ease-in-out;
-}
-
-.top-social img:hover {
-  box-shadow: 0 1px 6px 3px #e8e8e8;
-  background: rgba(255, 255, 255, 0.95);
-  transition: all 0.6s ease-in-out;
-}
-
-.top-social_v2 {
-  height: 32px;
-  margin-bottom: -15px;
-  list-style: none;
-  display: inline-block;
-}
-
-.top-social_v2 img {
-  height: 35px;
-  width: 35px;
-  padding: 6px;
-  background: 0 0;
-}
-
 .wechatInner img {
   border-radius: 0;
   width: 121px;
@@ -2906,6 +2869,15 @@ h1.main-title {
   display: flex;
   word-break: break-all;
   flex-wrap: wrap;
+}
+
+.hwcard-socialnet li{
+  float: left;
+  margin: 8px 5px;
+  height: 40px;
+  width: 48px;
+  padding: 8px 10px;
+  list-style-type: none;
 }
 
 .short-bulletin{
@@ -6747,24 +6719,6 @@ li.feature-2 {
   transition: background 0.8s;
 }
 
-.top-social li {
-  float: left;
-  margin: 0px 5px;
-}
-
-.top-social_v2 li {
-  float: left;
-  margin: 0px 6px;
-}
-
-.top-social li a {
-  cursor: pointer;
-}
-
-.top-social_v2 li a {
-  cursor: pointer;
-}
-
 .wechat {
   width: 40px;
   height: 40px;
@@ -9761,21 +9715,6 @@ body:not(.heimu_toggle_on) .new:hover .heimu.off {
     height: 120px;
   }
 
-  .top-social_v2 img {
-    width: 35px;
-    height: 35px;
-  }
-
-  .top-social {
-    margin-top: 22px;
-  }
-
-  .top-social img {
-    height: 31.5px;
-    width: 35px;
-    padding: 5.25px 7px;
-  }
-
   .header-info {
     width: 60%;
     font-size: 15px;
@@ -10338,13 +10277,6 @@ body.dark .site-header.yya {
   transition: all 0.6s ease-in-out;
 }
 
-body.dark .top-social img:hover {
-    box-shadow: 0 1px 30px 2px var(--theme-skin-dark) !important;
-    background: rgba(51, 51, 51, 0.95);
-    -webkit-transition: all 0.6s ease-in-out;
-    transition: all 0.6s ease-in-out;
-}
-
 body.dark .brick a {
   color: #7D7D7D;
   box-shadow: 0 1px 20px 2px rgba(26, 26, 26, 0.8);
@@ -10747,10 +10679,6 @@ body.dark .header-shuo {
 
 body.dark .header-info{
   border: 1px solid rgba(51,51,51,0.7);
-}
-
-body.dark .top-social img{
-  border: 0.5px solid rgba(51,51,51,0.7);
 }
 
 body.dark .pattern-center h1.entry-title {

@@ -4,10 +4,6 @@ include(get_stylesheet_directory().'/layouts/all_opt.php');
 $text_logo = iro_opt('text_logo');
 
 $print_social_zone = function() use ($all_opt, $social_display_icon): void {
-    // 左箭头
-    if (iro_opt('cover_random_graphs_switch', 'true')): ?>
-        <li id="bg-pre"><img src="<?= $social_display_icon ?>pre.png" loading="lazy" alt="<?= __('Previous', 'sakurairo') ?>"/></li>
-    <?php endif;
 
     // 微信
     if (iro_opt('wechat')): ?>
@@ -32,10 +28,6 @@ $print_social_zone = function() use ($all_opt, $social_display_icon): void {
         <li><a onclick="mail_me()" class="social-wangyiyun" title="E-mail"><img loading="lazy" alt="E-mail" src="<?= iro_opt('vision_resource_basepath') ?><?= iro_opt('social_display_icon') ?>/mail.png" /></a></li>
     <?php endif;
 
-    // 右箭头
-    if (iro_opt('cover_random_graphs_switch', 'true')): ?>
-        <li id="bg-next"><img loading="lazy" src="<?= $social_display_icon ?>next.png" alt="<?= __('Next', 'sakurairo') ?>"/></li>
-    <?php endif;
 };
 
 // 获取作者信息
@@ -94,8 +86,6 @@ if ($author_count == 1) {
 }
 ?>
 
-<div id="banner_wave_1"></div>
-<div id="banner_wave_2"></div>
 <figure id="centerbg" class="centerbg">
     <?php if (iro_opt('infor_bar')): ?>
         <div class="focusinfo">
@@ -118,18 +108,8 @@ if ($author_count == 1) {
                         </script>
                     <?php endif; ?>
                     <p><?= iro_opt('signature_text', 'Hi, Mashiro?'); ?></p>
-                    <?php if (iro_opt('infor_bar_style') === 'v2'): ?>
-                        <div class="top-social_v2">
-                            <?php $print_social_zone(); ?>
-                        </div>
-                    <?php endif; ?>
                 </div>
             </div>
-            <?php if (iro_opt('infor_bar_style') === 'v1'): ?>
-                <div class="top-social">
-                    <?php $print_social_zone(); ?>
-                </div>
-            <?php endif; ?>
         </div>
     <?php endif; ?>
     <div class="homepage-widget">
@@ -226,7 +206,12 @@ if ($author_count == 1) {
         </div>
         <div class="homepage-widget-card">
             <div class="homepage-widget-card-info">
-                <i class="fa-solid fa-paperclip"></i><?php esc_attr_e('Links', 'sakurairo'); ?>
+            <i class="fa-solid fa-circle-nodes"></i><?php esc_attr_e('Social Network', 'sakurairo'); ?>
+            </div>
+            <div class="hwcard-content">
+            <div class="hwcard-socialnet">
+            <?php $print_social_zone(); ?>
+            </div>
             </div>
         </div>
     </div>
